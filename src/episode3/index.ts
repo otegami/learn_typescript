@@ -313,29 +313,29 @@
 // 返り値
 // HasNameAndAge <: HasName
 
-type UnaryFunc = (arg: number) => number
-type BinaryFunc = (left: number, rigth: number) => number
+// type UnaryFunc = (arg: number) => number
+// type BinaryFunc = (left: number, rigth: number) => number
 
-const double: UnaryFunc = arg => arg * 2
-const add: BinaryFunc = (left, rigth) => left + rigth
+// const double: UnaryFunc = arg => arg * 2
+// const add: BinaryFunc = (left, rigth) => left + rigth
 
-const bin: BinaryFunc = double
-console.log(bin(10, 100))
+// const bin: BinaryFunc = double
+// console.log(bin(10, 100))
 
-type HasName = { name: string }
-type HasNameAndAge = { name: string, age: number }
+// type HasName = { name: string }
+// type HasNameAndAge = { name: string, age: number }
 
-type Obj = {
-  func: (arg: HasName) => string,
-  method(arg: HasName): string
-}
+// type Obj = {
+//   func: (arg: HasName) => string,
+//   method(arg: HasName): string
+// }
 
-const something: Obj = {
-  func: user => user.name,
-  method: user => user.name
-}
+// const something: Obj = {
+//   func: user => user.name,
+//   method: user => user.name
+// }
 
-const getAge = (user: HasNameAndAge) => String(user.age)
+// const getAge = (user: HasNameAndAge) => String(user.age)
 
-something.func = getAge
-something.method = getAge
+// something.func = getAge
+// something.method = getAge
