@@ -249,23 +249,23 @@
 
 // アロー関数における this
 
-class User {
-  name: string
-  #age: number
+// class User {
+//   name: string
+//   #age: number
 
-  constructor(name: string, age: number) {
-    this.name = name
-    this.#age = age
-  }
+//   constructor(name: string, age: number) {
+//     this.name = name
+//     this.#age = age
+//   }
 
-  public isAdult(): boolean {
-    return this.#age >= 20
-  }
+//   public isAdult(): boolean {
+//     return this.#age >= 20
+//   }
 
-  // public filterOrder(users: readonly User[]): User[] {
-  //   return users.filter(u => u.#age > this.#age)
-  // }
-}
+// public filterOrder(users: readonly User[]): User[] {
+//   return users.filter(u => u.#age > this.#age)
+// }
+// }
 
 // const otegami = new User("otegami", 28)
 // const john = new User("John Smith", 15)
@@ -288,11 +288,159 @@ class User {
 
 // 関数の中以外の this
 
-class A {
-  static foo = 123
-  static bar = this.foo + 100
+// class A {
+//   static foo = 123
+//   static bar = this.foo + 100
 
-  static {
-    console.log("bar is", this.bar)
+//   static {
+//     console.log("bar is", this.bar)
+//   }
+// }
+
+// class RepeatArray<T> extends Array<T> {
+//   repeat(times: number): RepeatArray<T> {
+//     const result = new RepeatArray<T>()
+//     for (let i = 0; i < times; i++) {
+//       result.push(...this)
+//     }
+//     return result
+//   }
+// }
+
+// const arr = new RepeatArray(1, 2)
+// console.log(arr.push(3))
+// const repeated = arr.repeat(3)
+// console.log(repeated)
+
+// 例外処理
+// const throwError = () => {
+//   const error = new Error("エラーが発生しました!!!")
+//   throw error
+// }
+
+// console.log("エラーを発生させます")
+// throwError()
+// console.log("エラーを発生させました")
+
+// const getAverage = (nums: number[]) => {
+//   if (nums.length === 0) throw new Error("配列が空です。")
+//   return sum(nums) / nums.length
+// }
+
+// 例外をキャッチする try-catch 文
+// try {
+//   console.log("エラーを発生させます")
+//   throwError()
+//   console.log("エラーを発生させました")
+// } catch (err) {
+//   console.log("エラーをキャッチしました")
+//   console.log(err)
+// }
+// console.log("終わり")
+
+// 例外処理と大域脱出
+
+// const sum = (nums: number[]) => nums.reduce((prev, current, index, origin) => {
+//   console.log(origin)
+//   return prev + current
+// })
+
+// const getAverage = (nums: number[]) => {
+//   if (nums.length === 0) return undefined
+//   return sum(nums)
+// }
+
+// console.log(getAverage([1, 2, 3]))
+
+// const throwError = () => {
+//   const error = new Error("エラーが発生しました!!!")
+//   throw error
+//   console.log("これも表示されない error")
+// }
+
+// try {
+//   throwError()
+//   console.log("これは表示されない try")
+// } catch (err) {
+//   console.log(err)
+// }
+
+// try {
+//   const bigInt = BigInt("foobar")
+//   console.log(bigInt)
+// } catch (error) {
+//   console.log(error)
+// }
+
+// finally で脱出に割り込む
+// try {
+//   console.log("try ブロック")
+//   throwError()
+// } catch (err) {
+//   console.log(err)
+//   console.log("catch ブロック")
+// } finally {
+//   console.log("finally ブロック")
+// }
+
+// const sum = (max: number): number => {
+//   try {
+//     let result = 0
+//     for (let i = 1; i <= max; i++) {
+//       result += i
+//     }
+//     return result
+//   } finally {
+//     console.log("sum から脱出します!!!")
+//   }
+// }
+
+// console.log(sum(100))
+
+// class EmptyArrayError extends Error { }
+
+// const sum = (nums: number[]) => nums.reduce((prev, current) => prev + current)
+
+// const getAverage = (nums: number[]) => {
+//   if (nums.length === 0) throw new EmptyArrayError("配列が空です。")
+//   return sum(nums) / nums.length
+// }
+
+// try {
+//   getAverage([1, 2, 3])
+//   getAverage([])
+// } catch (err) {
+//   if (err instanceof EmptyArrayError) {
+//     console.log("EmptyArrayError をキャッチしました。")
+//   } else {
+//     throw err
+//   }
+// }
+
+class EmptyUserName extends Error { }
+
+class User {
+  readonly name: string
+  readonly age: number
+
+  constructor(name: string, age: number) {
+    if (name === "") throw new EmptyUserName("名前は空にできません。")
+
+    this.name = name
+    this.age = age
+  }
+
+  getMessage(message: string): string {
+    return `${this.name}(${this.age}) 「${message}」`
   }
 }
+
+const otegami = new User("otegami", 28)
+console.log(otegami.getMessage("こんにちは"))
+
+const createUser = (name: string, age: number): (x: string) => string => {
+  return (message: string) => `${name}(${age}) 「${message}」`
+}
+
+const getMessage = createUser("otegami", 28)
+console.log(getMessage("こんにちは"))
