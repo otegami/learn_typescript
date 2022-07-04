@@ -417,30 +417,30 @@
 //   }
 // }
 
-class EmptyUserName extends Error { }
+// class EmptyUserName extends Error { }
 
-class User {
-  readonly name: string
-  readonly age: number
+// class User {
+//   readonly name: string
+//   readonly age: number
 
-  constructor(name: string, age: number) {
-    if (name === "") throw new EmptyUserName("名前は空にできません。")
+//   constructor(name: string, age: number) {
+//     if (name === "") throw new EmptyUserName("名前は空にできません。")
 
-    this.name = name
-    this.age = age
-  }
+//     this.name = name
+//     this.age = age
+//   }
 
-  getMessage(message: string): string {
-    return `${this.name}(${this.age}) 「${message}」`
-  }
-}
+//   getMessage(message: string): string {
+//     return `${this.name}(${this.age}) 「${message}」`
+//   }
+// }
 
-const otegami = new User("otegami", 28)
-console.log(otegami.getMessage("こんにちは"))
+// const otegami = new User("otegami", 28)
+// console.log(otegami.getMessage("こんにちは"))
 
-const createUser = (name: string, age: number): (x: string) => string => {
-  return (message: string) => `${name}(${age}) 「${message}」`
-}
+// const createUser = (name: string, age: number): (x: string) => string => {
+//   return (message: string) => `${name}(${age}) 「${message}」`
+// }
 
-const getMessage = createUser("otegami", 28)
-console.log(getMessage("こんにちは"))
+// const getMessage = createUser("otegami", 28)
+// console.log(getMessage("こんにちは"))
