@@ -136,3 +136,80 @@
 // }
 
 // リテラル型
+
+// const getHelloStr = (): `Hello, ${string}!` => {
+//   const rand = Math.random()
+//   if (rand < 0.3) {
+//     return "Hello, world!"
+//   } else if (rand < 0.6) {
+//     return "Hello, my world!"
+//   } else if (rand < 0.9) {
+//     return "Hello, world."
+//   } else {
+//     return "Hell, world!"
+//   }
+// }
+
+// const makeKey = <T extends string>(userName: T) => {
+//   return `user.${userName}` as const
+// }
+
+// const otegamiKey: "user.otegami" = makeKey("otegami")
+
+// const fromKey = <T extends string>(key: `user:${T}`): T => {
+//   return key.slice(5) as T
+// }
+
+// const user = fromKey("user:otegami")
+
+// ユニオン型とリテラル型を組み合わせて使う
+
+// const signNumber = (type: "plus" | "minus") => {
+//   return type === "plus" ? 1 : -1
+// }
+
+// console.log(signNumber("plus"))
+// console.log(signNumber("minus"))
+// // console.log(signNumber("otegami"))
+
+// type Otegami = {
+//   name: "otegami"
+//   age: number
+// }
+
+// const otegami: Otegami = {
+//   name: "otegami",
+//   age: 26
+// }
+
+// // otegami.name = 'a'
+
+// const windeningOtegami = "otegami"
+// const otegami: "otegami" = "otegami"
+
+// let otegami3 = windeningOtegami
+// let otegami4 = otegami
+
+// type SingType = "plus" | "minus"
+
+// const signNumber = (type: SingType) => {
+//   return type === "plus" ? 1 : -1
+// }
+
+// const numberWithSign = (num: number, type: SingType | "none") => {
+//   if (type === "none") return 0
+//   return num * signNumber(type)
+// }
+
+// const numberWithSign3 = (num: number, type: SingType | "none") => {
+//   return type === "none" ? 0 : num * signNumber(type)
+// }
+
+// console.log(numberWithSign(5, "plus"))
+// console.log(numberWithSign(5, "minus"))
+// console.log(numberWithSign(5, "none"))
+
+// console.log(numberWithSign3(5, "plus"))
+// console.log(numberWithSign3(5, "minus"))
+// console.log(numberWithSign3(5, "none"))
+
