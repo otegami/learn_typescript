@@ -213,3 +213,172 @@
 // console.log(numberWithSign3(5, "minus"))
 // console.log(numberWithSign3(5, "none"))
 
+// 代数的データ型をユニオン型で再現するテクニック
+
+// type Animal = {
+//   tag: "animal"
+//   species: string
+// }
+
+// type Human = {
+//   tag: "human"
+//   name: string
+// }
+
+// type User = Animal | Human
+
+// const tama: User = {
+//   tag: "animal",
+//   species: "Felis silvestris catus"
+// }
+
+// const otegami: User = {
+//   tag: "human",
+//   name: "otegami"
+// }
+
+// // const alien: User = {
+// //   tag: "alien",
+// //   name: "gray"
+// // }
+
+// const getUserName = (user: User): string => {
+//   switch (user.tag) {
+//     case "human":
+//       return user.name
+//     case "animal":
+//       return "名無し"
+//   }
+// }
+
+// console.log(getUserName(tama))
+// console.log(getUserName(otegami))
+
+// // const getUserNameByType = (user: User): string => {
+// //   switch (typeof user) {
+// //     case "Human":
+// //       return user.name
+// //     case "Animal":
+// //       return "名無し"
+// //   }
+// // }
+
+// type Human = {
+//   type: "human"
+//   name: string
+//   age: bigint
+// }
+
+// const setAge = (human: Human, age: Human["age"]): Human => {
+//   return { ...human, age }
+// }
+
+// const otegami: Human = {
+//   type: "human",
+//   name: "otegami",
+//   age: 28n
+// }
+
+// const futureOtegami = setAge(otegami, 29n)
+// console.log(futureOtegami)
+
+// type Human = {
+//   name: string
+//   age: number
+// }
+
+// type HumanKeys = keyof Human
+
+// let key: HumanKeys = "name"
+// key = "age"
+// // key = "hoge"
+
+// const mmconversionTable = {
+//   mm: 1,
+//   cm: 10,
+//   m: 1e3,
+//   km: 1e6
+// }
+
+// const convertUnits = (value: number, unit: keyof typeof mmconversionTable) => {
+//   const mmValue = value * mmconversionTable[unit]
+//   return {
+//     mm: mmValue,
+//     m: mmValue / 1e3,
+//     km: mmValue / 1e6
+//   }
+// }
+
+// console.log(convertUnits(5600, "m"))
+
+// const get = <T, K extends keyof T & string>(obj: T, key: K): T[K] => {
+//   const keyName: string = key
+//   return obj[key]
+// }
+
+// type Human = {
+//   name: string
+//   age: number
+// }
+
+// const otegami: Human = {
+//   name: "otegami",
+//   age: 28
+// }
+
+// const otegamiName = get(otegami, "name")
+// const otegamiAge = get(otegami, "age")
+// // const otegamiGender = get(otegami, "gender")
+
+// type Obj = {
+//   0: string,
+//   1: number
+// }
+
+// const obj: Obj = {
+//   0: "otegami",
+//   "1": 28
+// }
+
+// obj["0"] = "john"
+// obj[1] = 15
+
+// console.log(obj)
+// type ObjKeys = keyof Obj
+// const key: ObjKeys = 1
+// const key2: ObjKeys = 0
+// // const key3: ObjKeys = "1"
+// // const key4: ObjKeys = "0"
+
+// as による型アサーション
+// const getFirstFiveLetters = (strOrNum: string | number) => {
+//   const str = strOrNum as string
+//   return str.slice(0, 5)
+// }
+
+// console.log(getFirstFiveLetters("otegamiotegami"))
+// console.log(getFirstFiveLetters(123))
+
+// type Animal = {
+//   tag: "animal"
+//   species: string
+// }
+
+// type Human = {
+//   tag: "human"
+//   name: string
+// }
+
+// type User = Animal | Human
+
+// const getNameslfAllHuman = (users: readonly User[]): string[] | undefined => {
+//   if (users.every(user => user.tag === "human")) {
+//     return (users as Human[]).map(user => user.name)
+//   }
+//   return undefined
+// }
+
+type Human = {
+  name: string
+  age: number
+}
