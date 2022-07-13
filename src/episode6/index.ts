@@ -378,7 +378,150 @@
 //   return undefined
 // }
 
-type Human = {
-  name: string
-  age: number
-}
+// type Human = {
+//   name: string
+//   age: number
+// }
+
+// const getOneUserName = (user1?: Human, user2?: Human): string | undefined => {
+//   // if (user1 === undefined && user2 === undefined) {
+//   //   return undefined
+//   // }
+//   // if (user1 !== undefined) {
+//   //   return user1.name
+//   // }
+//   // // return user2!.name
+//   // return (user2 as Human).name
+//   return user1?.name ?? user2?.name
+// }
+
+// const names1 = ["otegami", "john", "taro"]
+// const names2 = ["otegami", "john", "taro"] as const
+
+// type Name = (typeof names2)[number]
+
+// const doWhatever = (obj: any) => {
+//   console.log(obj.user.name)
+//   obj()
+//   const result = obj * 10
+//   return result
+// }
+
+// doWhatever(3)
+// doWhatever({ user: { name: "otegami" } })
+// doWhatever(() => console.log("hi"))
+
+// const doNothing = (val: unknown) => {
+//   // const name = val.name
+//   console.log(val)
+// }
+
+// doNothing(3)
+// doNothing({ user: { name: "otegami" } })
+// doNothing(() => console.log("hi"))
+
+// const useUnknown = (val: unknown) => {
+//   if (typeof val === "string") {
+//     console.log(val.slice(0, 5))
+//   } else {
+//     console.log(val)
+//   }
+// }
+
+// useUnknown("foobar")
+// useUnknown(null)
+
+// さらに高度な型
+
+// type HasToString = {
+//   toString: () => string
+// }
+
+// const useToString = (value: HasToString) => {
+//   console.log(`value is ${value.toString()}`)
+// }
+
+// useToString!({
+//   toString() {
+//     return "foo"
+//   }
+// })
+// useToString(3.14)
+
+// const useToString2 = (value: HasToString & object) => {
+//   console.log(`value is ${value.toString()}`)
+// }
+
+// useToString2({
+//   toString() {
+//     return "foo"
+//   }
+// })
+// useToString2(3.14)
+
+// const useNever = (value: never) => {
+//   const num: number = value
+//   const str: string = value
+//   const obj: object = value
+//   console.log(`value is ${value}`)
+// }
+
+// useNever({})
+// useNever(3.14)
+
+// const thrower = (): never => {
+//   throw new Error("error!")
+// }
+
+// const resultNever: never = thrower()
+// const str: string = resultNever
+
+// console.log(str)
+
+// const isStringOrNumber = (value: unknown): value is string | number => {
+//   return typeof value === "string" || typeof value === "number"
+// }
+
+// const isStringOrNumber = (value: unknown): value is string | number => {
+//   return typeof value === "string" || typeof value === "boolean"
+// }
+
+// const something: unknown = 123
+
+// if (isStringOrNumber(something)) {
+//   console.log(something.toString())
+// }
+
+// type Human = {
+//   type: "Human"
+//   name: string
+//   age: number
+// }
+
+// const isHuman = (value: any): value is Human => {
+//   if (value === null) return false
+//   return (
+//     value.type === "Human" &&
+//     typeof value.name === "string" &&
+//     typeof value.age === "number"
+//   )
+// }
+
+// type AssertHuman = (value: any) => asserts value is Human
+
+// const assertHuman: AssertHuman = (value: any): asserts value is Human => {
+//   if (value == null) {
+//     throw new Error("Given value is null or undefined")
+//   }
+//   if (value.type !== "Human" || typeof value.name !== "string" || typeof value.age !== "number") {
+//     throw new Error("Given value is not a Human")
+//   }
+// }
+
+// const checkAndUserHuman = (value: unknown) => {
+//   assertHuman(value)
+//   const name = value.name
+// }
+
+// 可変長タプル型
+
