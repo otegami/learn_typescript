@@ -525,3 +525,45 @@
 
 // 可変長タプル型
 
+// 力試し
+// type Option<T> = { type: "some", value: T } | { type: "none" }
+type Some<T> = { type: "some", value: T }
+type None = { type: "none" }
+type Option<T> = Some<T> | None
+
+// const isSome = <T>(obj: Option<T>): obj is { type: "some", value: T } => obj.type === "some" ? true : false
+// const isSome = <T>(obj: Option<T>): obj is Extract<Option<T>, { type: "some" }> => obj.type === "some" ? true : false
+const isSome = <T>(obj: Option<T>): obj is Some<T> => obj.type === "some" ? true : false
+
+const showNumberExists = (obj: Option<number>): void => {
+  if (isSome(obj)) { console.log(obj.value) }
+}
+
+// const mapOption = <T>(obj: Option<T>, callback: (x: T) => T): Option<T> => {
+//   if (isSome(obj)) { return ({ type: "some", value: callback(obj.value) }) }
+//   return ({ type: "none" })
+// }
+
+const mapOption = <T, U>(obj: Option<T>, callback: (value: T) => U): Option<U> => {
+  switch (obj.type) {
+    case "some":
+      return {
+        type: "some",
+        value: callback(obj.value)
+      }
+    case "none":
+      return {
+        type: "none"
+      }
+  }
+}
+
+const doubleOption = (obj: Option<number>): Option<number> => {
+  return mapOption(obj, x => x * 2)
+}
+
+const four: Option<number> = { type: "some", value: 4 }
+const nothing: Option<number> = { type: "none" }
+
+console.log(doubleOption(four))
+console.log(doubleOption(nothing))
