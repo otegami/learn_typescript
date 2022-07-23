@@ -1,10 +1,10 @@
 // import { readFile } from "fs"
 
-import { readFile } from "fs/promises";
+// import { readFile } from "fs/promises";
 
-const sleepReject = (duration: number) => {
-  return new Promise<never>((resolve, reject) => { setTimeout(reject, duration) })
-}
+// const sleepReject = (duration: number) => {
+//   return new Promise<never>((resolve, reject) => { setTimeout(reject, duration) })
+// }
 
 // // console.log("1. 読み込みを開始します")
 // // readFile("otegami.txt", (data) => {
@@ -128,8 +128,25 @@ const sleepReject = (duration: number) => {
 // const p3 = p2.then((result) => { console.log(result) })
 // console.log('1')
 
-const p1 = readFile("otegami", "utf8")
-const p2 = p1.then((result) => {
-  throw new Error("Error!!!")
-})
-p2.then((result) => { console.log(result) })
+// const p1 = readFile("otegami", "utf8")
+// const p2 = p1.then((result) => {
+//   throw new Error("Error!!!")
+// })
+// p2.then((result) => { console.log(result) })
+
+// const p = readFile("otegami.txt", "utf8")
+//   .then(() => {
+//     // throw new Error("Error!!!")
+//     sleepReject(1000)
+//   })
+//   .then((result) => {
+//     console.log(result)
+//   })
+//   .catch((err: unknown) => {
+//     console.log("エラーが発生しました!!!", err)
+//   })
+
+import("fs/promises")
+  .then(({ readFile }) => readFile("otegami.txt", "utf8"))
+  .then((result) => { console.log(result) })
+  .catch((error) => { console.log("エラーが発生しました!!!", error) })
