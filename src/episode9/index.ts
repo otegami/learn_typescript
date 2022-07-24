@@ -12,4 +12,3 @@ type Items = typeof priceData[keyof typeof priceData]
 
 const applePrice: Items = priceData.apple
 // const bananaPrice: Items = priceData.banana
-
